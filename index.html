@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>二年级语文听写</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 移动端优化样式 - 紧凑版 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            touch-action: manipulation;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", STHeiti, "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            min-height: 100vh;
+            padding: 12px;
+            -webkit-font-smoothing: antialiased;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* 容器 */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 标题 */
+        .header {
+            text-align: center;
+            margin-bottom: 15px;
+            padding: 15px 12px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border: 2px solid #64b5f6;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #64b5f6, #ba68c8);
+        }
+
+        .title {
+            font-size: 24px;
+            color: #1565c0;
+            font-weight: 700;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .title i {
+            color: #e91e63;
+            font-size: 24px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #5c6bc0;
+            font-weight: 500;
+        }
+
+        /* 语音检测区域 */
+        .voice-test-area {
+            background: #fff3cd;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 2px solid #ffc107;
+            display: none;
+        }
+
+        .voice-test-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: #856404;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .voice-test-header i {
+            font-size: 18px;
+        }
+
+        .voice-test-content {
+            font-size: 14px;
+            color: #856404;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .voice-test-btn {
+            background: #ffc107;
+            color: #856404;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        /* 设置区域 */
+        .settings {
+            background: white;
+            border-radius: 16px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .setting-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .setting-label {
+            font-size: 14px;
+            color: #2c387e;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .setting-label i {
+            color: #5c6bc0;
+            font-size: 14px;
+        }
+
+        .setting-control {
+            width: 100%;
+        }
+
+        .number-input, .select-input {
+            width: 100%;
+            padding: 10px 8px;
+            font-size: 15px;
+            border: 2px solid #bbdefb;
+            border-radius: 10px;
+            background: #f5f9ff;
+            text-align: center;
+            font-weight: 600;
+            color: #1a237e;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .number-input:focus, .select-input:focus {
+            outline: none;
+            border-color: #5c6bc0;
+            box-shadow: 0 0 0 2px rgba(92, 107, 192, 0.2);
+        }
+
+        /* 按钮区域 */
+        .buttons-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 12px 6px;
+            font-size: 14px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 600;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+            touch-action: manipulation;
+            min-height: 60px;
+        }
+
+        .btn:active {
+            transform: scale(0.96);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+        }
+
+        .btn i {
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #448aff 0%, #2979ff 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #ffa726 0%, #f57c00 100%);
+            color: white;
+        }
+
+        .btn:disabled {
+            background: #b0bec5;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+            opacity: 0.7;
+        }
+
+        /* 进度条 */
+        .progress-container {
+            margin: 15px 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #2c387e;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: #e3f2fd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #448aff, #2979ff);
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        /* 词语区域 */
+        .words-container {
+            background: white;
+            border-radius: 16px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            min-height: 180px;
+        }
+
+        .words-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+        }
+
+        .word-card {
+            background: #f9f9ff;
+            border-radius: 12px;
+            padding: 15px 10px;
+            text-align: center;
+            border: 2px solid #e3f2fd;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .word-card:active {
+            transform: scale(0.98);
+        }
+
+        .pinyin {
+            font-size: 16px;
+            color: #e91e63;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .pinyin i {
+            color: #448aff;
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        .character {
+            font-size: 22px;
+            min-height: 32px;
+            line-height: 32px;
+            border-bottom: 2px solid #448aff;
+            color: #1a237e;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .character.answered {
+            color: #2e7d32;
+            border-bottom-color: #4caf50;
+        }
+
+        /* 消息提示 */
+        .message {
+            text-align: center;
+            padding: 15px;
+            background: linear-gradient(135deg, #fff8e1, #ffecb3);
+            border-radius: 12px;
+            color: #f57c00;
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 15px;
+            display: none;
+            border: 2px solid #ffb74d;
+        }
+
+        .message i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        /* 浏览器引导 */
+        .browser-guide {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 2px solid #64b5f6;
+            display: none;
+        }
+
+        .browser-guide-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: #1565c0;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .browser-guide-header i {
+            font-size: 18px;
+        }
+
+        .browser-guide-content {
+            font-size: 14px;
+            color: #1a237e;
+            line-height: 1.5;
+        }
+
+        .browser-steps {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .browser-steps li {
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        /* 底部信息 */
+        .footer {
+            text-align: center;
+            color: #5c6bc0;
+            font-size: 12px;
+            margin-top: 20px;
+            padding: 10px;
+            opacity: 0.8;
+        }
+
+        /* 移动端优化 */
+        @media (max-width: 480px) {
+            .title {
+                font-size: 20px;
+            }
+            
+            .settings-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .buttons-row {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+            
+            .words-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .word-card {
+                padding: 12px 8px;
+            }
+            
+            .pinyin {
+                font-size: 14px;
+            }
+            
+            .character {
+                font-size: 20px;
+            }
+            
+            .btn {
+                padding: 10px 4px;
+                font-size: 13px;
+                min-height: 55px;
+            }
+            
+            .btn i {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .words-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .title {
+                font-size: 18px;
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .buttons-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部标题 -->
+        <div class="header">
+            <div class="title">
+                <i class="fas fa-book-open"></i>
+                <span id="pageTitle">二年级语文听写</span>
+                <i class="fas fa-pencil-alt"></i>
+            </div>
+            <div class="subtitle">移动端专用版 · 点击开始听写</div>
+        </div>
+
+        <!-- 语音测试区域 -->
+        <div class="voice-test-area" id="voiceTestArea">
+            <div class="voice-test-header">
+                <i class="fas fa-microphone-alt"></i>
+                <span>语音功能检测</span>
+            </div>
+            <div class="voice-test-content" id="voiceTestMessage">
+                正在检测语音功能，请稍候...
+            </div>
+            <button class="voice-test-btn" id="voiceTestBtn">
+                <i class="fas fa-volume-up"></i>
+                <span>测试语音功能</span>
+            </button>
+        </div>
+
+        <!-- 浏览器引导 -->
+        <div class="browser-guide" id="browserGuide">
+            <div class="browser-guide-header">
+                <i class="fas fa-info-circle"></i>
+                <span>使用提示</span>
+            </div>
+            <div class="browser-guide-content">
+                <p>为了获得最佳体验，请：</p>
+                <ol class="browser-steps">
+                    <li>点击右上角"..."，选择"在浏览器中打开"</li>
+                    <li>推荐使用 <strong>Chrome</strong> 或 <strong>Safari</strong> 浏览器</li>
+                    <li>首次使用时允许网页使用语音功能</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- 设置区域 -->
+        <div class="settings">
+            <!-- 设置项 - 三列布局 -->
+            <div class="settings-grid">
+                <div class="setting-item">
+                    <div class="setting-label">
+                        <i class="fas fa-list-ol"></i>
+                        <span>数量</span>
+                    </div>
+                    <div class="setting-control">
+                        <input type="number" class="number-input" id="wordCount" min="5" max="30" value="10">
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-label">
+                        <i class="fas fa-redo-alt"></i>
+                        <span>遍数</span>
+                    </div>
+                    <div class="setting-control">
+                        <select class="select-input" id="readTimes">
+                            <option value="1">1遍</option>
+                            <option value="2" selected>2遍</option>
+                            <option value="3">3遍</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-label">
+                        <i class="fas fa-clock"></i>
+                        <span>间隔</span>
+                    </div>
+                    <div class="setting-control">
+                        <select class="select-input" id="intervalTime">
+                            <option value="3">3秒</option>
+                            <option value="4" selected>4秒</option>
+                            <option value="5">5秒</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 按钮组 - 单排四个按钮 -->
+            <div class="buttons-row">
+                <button class="btn btn-primary" id="startBtn" disabled>
+                    <i class="fas fa-play-circle"></i>
+                    <span>开始</span>
+                </button>
+                <button class="btn btn-secondary" id="pauseBtn" disabled>
+                    <i class="fas fa-pause-circle"></i>
+                    <span>暂停</span>
+                </button>
+                <button class="btn btn-warning" id="showAnswerBtn">
+                    <i class="fas fa-check-circle"></i>
+                    <span>答案</span>
+                </button>
+                <button class="btn btn-success" id="resetBtn">
+                    <i class="fas fa-redo"></i>
+                    <span>重置</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 进度条 -->
+        <div class="progress-container">
+            <div class="progress-label">
+                <span>听写进度</span>
+                <span id="progressText">0/0</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <!-- 词语显示区域 -->
+        <div class="words-container">
+            <div class="words-grid" id="wordsGrid">
+                <!-- 词语卡片将在这里动态生成 -->
+                <div style="text-align: center; color: #9fa8da; padding: 30px 15px;">
+                    <i class="fas fa-spell-check" style="font-size: 40px; margin-bottom: 10px; display: block;"></i>
+                    <div style="font-size: 16px; font-weight: 500;">请先测试语音功能</div>
+                    <div style="font-size: 12px; margin-top: 5px;">点击上方"测试语音功能"按钮</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 消息提示 -->
+        <div class="message" id="completionMessage">
+            <i class="fas fa-trophy"></i>
+            听写完成！点击"答案"按钮查看结果
+        </div>
+
+        <!-- 底部信息 -->
+        <div class="footer">
+            <div>二年级上册语文听写练习</div>
+            <div style="margin-top: 3px; font-size: 11px;">如语音功能无法使用，请按上方提示操作</div>
+        </div>
+    </div>
+
+    <script>
+        // ========== 核心配置：二年级上册精选词语库 ==========
+        const wordLibrary = [
+            { pinyin: "mā ma", word: "妈妈" },
+            { pinyin: "bà ba", word: "爸爸" },
+            { pinyin: "wǒ men", word: "我们" },
+            { pinyin: "tā men", word: "他们" },
+            { pinyin: "shēn zi", word: "身子" },
+            { pinyin: "kàn jiàn", word: "看见" },
+            { pinyin: "nǎ lǐ", word: "哪里" },
+            { pinyin: "nà biān", word: "那边" },
+            { pinyin: "shén me", word: "什么" },
+            { pinyin: "tài yáng", word: "太阳" },
+            { pinyin: "tiān kōng", word: "天空" },
+            { pinyin: "yī qǐ", word: "一起" },
+            { pinyin: "dōng tiān", word: "冬天" },
+            { pinyin: "huā duǒ", word: "花朵" },
+            { pinyin: "hǎi yáng", word: "海洋" },
+            { pinyin: "xǔ duō", word: "许多" },
+            { pinyin: "tián dì", word: "田地" },
+            { pinyin: "gōng zuò", word: "工作" },
+            { pinyin: "rú guǒ", word: "如果" },
+            { pinyin: "yǐ jīng", word: "已经" },
+            { pinyin: "zhǎng dà", word: "长大" },
+            { pinyin: "zì jǐ", word: "自己" },
+            { pinyin: "dòng wù", word: "动物" },
+            { pinyin: "zhī shi", word: "知识" },
+            { pinyin: "měi lì", word: "美丽" },
+            { pinyin: "xià lái", word: "下来" },
+            { pinyin: "gāo xìng", word: "高兴" },
+            { pinyin: "gē ge", word: "哥哥" },
+            { pinyin: "qiū qiān", word: "秋千" },
+            { pinyin: "bǎo bèi", word: "宝贝" },
+            { pinyin: "huí lái", word: "回来" },
+            { pinyin: "tiān qì", word: "天气" },
+            { pinyin: "gào su", word: "告诉" },
+            { pinyin: "míng zi", word: "名字" },
+            { pinyin: "xīng xing", word: "星星" },
+            { pinyin: "wǎn shang", word: "晚上" },
+            { pinyin: "nǎi nai", word: "奶奶" },
+            { pinyin: "yé ye", word: "爷爷" },
+            { pinyin: "zhōng jiān", word: "中间" },
+            { pinyin: "shān dǐng", word: "山顶" },
+            { pinyin: "shān tóu", word: "山头" },
+            { pinyin: "yún hǎi", word: "云海" },
+            { pinyin: "qián fāng", word: "前方" },
+            { pinyin: "shù mù", word: "树木" },
+            { pinyin: "zhōng wǔ", word: "中午" },
+            { pinyin: "yǎn qián", word: "眼前" },
+            { pinyin: "dì fang", word: "地方" },
+            { pinyin: "shuǐ guǒ", word: "水果" },
+            { pinyin: "chéng shì", word: "城市" },
+            { pinyin: "kōng qì", word: "空气" },
+            { pinyin: "huí dá", word: "回答" },
+            { pinyin: "dà huà", word: "大话" },
+            { pinyin: "nà me", word: "那么" },
+            { pinyin: "tái tóu", word: "抬头" },
+            { pinyin: "qián miàn", word: "前面" },
+            { pinyin: "chū qù", word: "出去" },
+            { pinyin: "zhī dào", word: "知道" },
+            { pinyin: "gǎn kuài", word: "赶快" },
+            { pinyin: "míng tiān", word: "明天" },
+            { pinyin: "hǎo xiàng", word: "好像" },
+            { pinyin: "cóng qián", word: "从前" },
+            { pinyin: "yǐ hòu", word: "以后" },
+            { pinyin: "yè zi", word: "叶子" },
+            { pinyin: "chóng zi", word: "虫子" },
+            { pinyin: "lín jū", word: "邻居" },
+            { pinyin: "qí guài", word: "奇怪" },
+            { pinyin: "zhōng guó", word: "中国" },
+            { pinyin: "shèng lì", word: "胜利" },
+            { pinyin: "dào lù", word: "道路" },
+            { pinyin: "hóng jūn", word: "红军" },
+            { pinyin: "zhàn shì", word: "战士" },
+            { pinyin: "yī kuài ér", word: "一块儿" },
+            { pinyin: "bái tiān", word: "白天" },
+            { pinyin: "nán wàng", word: "难忘" },
+            { pinyin: "rén mín", word: "人民" },
+            { pinyin: "yīn wèi", word: "因为" },
+            { pinyin: "huān lè", word: "欢乐" },
+            { pinyin: "kāi xīn", word: "开心" },
+            { pinyin: "xiàn zài", word: "现在" },
+            { pinyin: "péng you", word: "朋友" },
+            { pinyin: "bǎo hù", word: "保护" },
+            { pinyin: "sì jì", word: "四季" }
+        ];
+
+        // ========== 全局变量 ==========
+        let selectedWords = [];
+        let currentWordIndex = 0;
+        let currentReadTimes = 0;
+        let timer = null;
+        let isPaused = false;
+        let isDictationRunning = false;
+        let voiceSupported = false;
+        let voiceTested = false;
+
+        // ========== 页面初始化 ==========
+        function initPage() {
+            // 设置页面标题
+            const now = new Date();
+            const month = now.getMonth() + 1;
+            const day = now.getDate();
+            const weekDays = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
+            const weekDay = weekDays[now.getDay()];
+            document.getElementById("pageTitle").innerText = `${month}月${day}日 ${weekDay}`;
+            
+            // 显示语音测试区域
+            document.getElementById("voiceTestArea").style.display = "block";
+            
+            // 检查是否在微信中
+            checkWechatBrowser();
+            
+            // 初始化事件监听
+            initEvents();
+            
+            // 检测语音支持
+            detectVoiceSupport();
+        }
+
+        // 检查是否在微信内置浏览器中
+        function checkWechatBrowser() {
+            const ua = navigator.userAgent.toLowerCase();
+            if (ua.match(/micromessenger/i)) {
+                // 在微信中，显示引导提示
+                document.getElementById("browserGuide").style.display = "block";
+            }
+        }
+
+        // 检测语音支持
+        function detectVoiceSupport() {
+            if ('speechSynthesis' in window) {
+                voiceSupported = true;
+                document.getElementById("voiceTestMessage").textContent = "您的浏览器支持语音功能，请点击下方按钮进行测试";
+            } else {
+                voiceSupported = false;
+                document.getElementById("voiceTestMessage").textContent = "您的浏览器不支持语音功能，请使用Chrome或Safari浏览器打开此页面";
+                document.getElementById("voiceTestBtn").disabled = true;
+            }
+        }
+
+        // 初始化事件监听
+        function initEvents() {
+            // 语音测试按钮
+            document.getElementById("voiceTestBtn").addEventListener("click", testVoiceFunction);
+            
+            // 开始听写按钮
+            document.getElementById("startBtn").addEventListener("click", startDictation);
+            
+            // 暂停按钮
+            document.getElementById("pauseBtn").addEventListener("click", togglePause);
+            
+            // 显示答案按钮
+            document.getElementById("showAnswerBtn").addEventListener("click", showAnswer);
+            
+            // 重置按钮
+            document.getElementById("resetBtn").addEventListener("click", resetDictation);
+            
+            // 输入验证
+            document.getElementById("wordCount").addEventListener("change", function() {
+                let value = parseInt(this.value);
+                if (value < 5) this.value = 5;
+                if (value > 30) this.value = 30;
+            });
+            
+            // 页面可见性变化处理
+            document.addEventListener("visibilitychange", function() {
+                if (document.hidden && isDictationRunning && !isPaused) {
+                    togglePause();
+                }
+            });
+        }
+
+        // 测试语音功能
+        function testVoiceFunction() {
+            if (!voiceSupported) {
+                document.getElementById("voiceTestMessage").textContent = "语音功能不支持，请使用Chrome或Safari浏览器";
+                return;
+            }
+            
+            const testBtn = document.getElementById("voiceTestBtn");
+            testBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>测试中...</span>';
+            testBtn.disabled = true;
+            
+            // 测试语音播放
+            const utterance = new SpeechSynthesisUtterance("测试语音功能");
+            utterance.lang = "zh-CN";
+            utterance.volume = 1;
+            utterance.rate = 0.8;
+            utterance.pitch = 1.0;
+            
+            utterance.onstart = function() {
+                document.getElementById("voiceTestMessage").textContent = "语音功能测试中...请听语音";
+            };
+            
+            utterance.onend = function() {
+                voiceTested = true;
+                document.getElementById("voiceTestMessage").textContent = "✅ 语音功能测试成功！您现在可以开始听写了";
+                testBtn.innerHTML = '<i class="fas fa-check-circle"></i><span>测试成功</span>';
+                
+                // 启用开始按钮
+                document.getElementById("startBtn").disabled = false;
+                
+                // 更新初始显示
+                document.getElementById("wordsGrid").innerHTML = `
+                    <div style="text-align: center; color: #9fa8da; padding: 30px 15px;">
+                        <i class="fas fa-spell-check" style="font-size: 40px; margin-bottom: 10px; display: block;"></i>
+                        <div style="font-size: 16px; font-weight: 500;">语音功能正常</div>
+                        <div style="font-size: 12px; margin-top: 5px;">点击"开始"按钮开始听写</div>
+                    </div>
+                `;
+                
+                // 3秒后隐藏测试区域
+                setTimeout(() => {
+                    document.getElementById("voiceTestArea").style.display = "none";
+                }, 3000);
+            };
+            
+            utterance.onerror = function(event) {
+                voiceTested = false;
+                document.getElementById("voiceTestMessage").textContent = "❌ 语音播放失败，请检查浏览器设置或更换浏览器";
+                testBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i><span>测试失败</span>';
+                testBtn.disabled = false;
+                
+                // 显示详细解决方案
+                setTimeout(() => {
+                    alert("语音测试失败，请尝试以下方法：\n1. 点击右上角'...'，选择'在浏览器中打开'\n2. 推荐使用Chrome或Safari浏览器\n3. 检查手机是否静音\n4. 首次使用时允许网页使用语音功能");
+                }, 500);
+            };
+            
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // ========== 核心功能 ==========
+        function startDictation() {
+            if (isDictationRunning) return;
+            
+            if (!voiceTested) {
+                alert("请先测试语音功能，确保语音正常工作");
+                document.getElementById("voiceTestArea").style.display = "block";
+                return;
+            }
+            
+            document.getElementById("startBtn").disabled = true;
+            document.getElementById("pauseBtn").disabled = false;
+            document.getElementById("showAnswerBtn").disabled = false;
+            document.getElementById("completionMessage").style.display = "none";
+            
+            const wordCount = parseInt(document.getElementById("wordCount").value);
+            const readTimes = parseInt(document.getElementById("readTimes").value);
+            const interval = parseInt(document.getElementById("intervalTime").value) * 1000;
+            
+            if (isNaN(wordCount) || wordCount < 5 || wordCount > 30) {
+                alert("请选择5-30个词语！");
+                document.getElementById("startBtn").disabled = false;
+                document.getElementById("pauseBtn").disabled = true;
+                return;
+            }
+            
+            selectedWords = [];
+            const tempLibrary = [...wordLibrary];
+            const count = Math.min(wordCount, wordLibrary.length);
+            
+            for (let i = 0; i < count; i++) {
+                const randomIndex = Math.floor(Math.random() * tempLibrary.length);
+                selectedWords.push(tempLibrary[randomIndex]);
+                tempLibrary.splice(randomIndex, 1);
+            }
+            
+            renderWordsGrid();
+            updateProgress();
+            
+            currentWordIndex = 0;
+            currentReadTimes = 0;
+            isPaused = false;
+            isDictationRunning = true;
+            
+            playWord(interval, readTimes);
+        }
+        
+        function renderWordsGrid() {
+            const wordsGrid = document.getElementById("wordsGrid");
+            wordsGrid.innerHTML = "";
+            
+            selectedWords.forEach((word, index) => {
+                const wordCard = document.createElement("div");
+                wordCard.className = "word-card";
+                wordCard.innerHTML = `
+                    <div class="pinyin">
+                        <span>${word.pinyin}</span>
+                        <i class="fas fa-volume-up" onclick="playSingleWord(${index})"></i>
+                    </div>
+                    <div class="character" id="character-${index}"></div>
+                `;
+                wordsGrid.appendChild(wordCard);
+            });
+        }
+        
+        function playWord(interval, readTimes) {
+            if (isPaused) return;
+            
+            if (currentWordIndex >= selectedWords.length) {
+                finishDictation();
+                return;
+            }
+            
+            const word = selectedWords[currentWordIndex].word;
+            readWordAloud(word);
+            
+            currentReadTimes++;
+            
+            if (currentReadTimes >= readTimes) {
+                currentWordIndex++;
+                currentReadTimes = 0;
+                updateProgress();
+            }
+            
+            timer = setTimeout(() => {
+                playWord(interval, readTimes);
+            }, interval);
+        }
+        
+        function readWordAloud(word) {
+            window.speechSynthesis.cancel();
+            
+            const utterance = new SpeechSynthesisUtterance(word);
+            utterance.lang = "zh-CN";
+            utterance.volume = 1;
+            utterance.rate = 0.8;
+            utterance.pitch = 1.0;
+            
+            const voices = speechSynthesis.getVoices();
+            const chineseVoice = voices.find(voice => 
+                voice.lang === 'zh-CN' || voice.lang === 'zh-CN'
+            );
+            if (chineseVoice) utterance.voice = chineseVoice;
+            
+            // 添加错误处理
+            utterance.onerror = function(event) {
+                console.error("语音播放错误:", event);
+                // 如果语音播放失败，继续下一个词
+                currentReadTimes = readTimes; // 强制完成当前词的播放
+            };
+            
+            window.speechSynthesis.speak(utterance);
+        }
+        
+        function playSingleWord(index) {
+            if (index >= 0 && index < selectedWords.length) {
+                readWordAloud(selectedWords[index].word);
+            }
+        }
+        
+        function togglePause() {
+            if (!isDictationRunning) return;
+            
+            isPaused = !isPaused;
+            const pauseBtn = document.getElementById("pauseBtn");
+            
+            if (isPaused) {
+                pauseBtn.innerHTML = '<i class="fas fa-play-circle"></i><span>继续</span>';
+                window.speechSynthesis.pause();
+                clearTimeout(timer);
+            } else {
+                pauseBtn.innerHTML = '<i class="fas fa-pause-circle"></i><span>暂停</span>';
+                window.speechSynthesis.resume();
+                
+                const readTimes = parseInt(document.getElementById("readTimes").value);
+                const interval = parseInt(document.getElementById("intervalTime").value) * 1000;
+                
+                setTimeout(() => {
+                    playWord(interval, readTimes);
+                }, 500);
+            }
+        }
+        
+        function finishDictation() {
+            clearTimeout(timer);
+            isDictationRunning = false;
+            
+            document.getElementById("startBtn").disabled = false;
+            document.getElementById("pauseBtn").disabled = true;
+            document.getElementById("completionMessage").style.display = "block";
+            
+            if (voiceTested) {
+                setTimeout(() => {
+                    const utterance = new SpeechSynthesisUtterance("听写完成");
+                    utterance.lang = "zh-CN";
+                    utterance.rate = 0.9;
+                    window.speechSynthesis.speak(utterance);
+                }, 300);
+            }
+        }
+        
+        function showAnswer() {
+            selectedWords.forEach((word, index) => {
+                const characterElement = document.getElementById(`character-${index}`);
+                if (characterElement) {
+                    characterElement.innerText = word.word;
+                    characterElement.classList.add("answered");
+                }
+            });
+            
+            document.getElementById("showAnswerBtn").disabled = true;
+        }
+        
+        function resetDictation() {
+            clearTimeout(timer);
+            window.speechSynthesis.cancel();
+            
+            selectedWords = [];
+            currentWordIndex = 0;
+            currentReadTimes = 0;
+            isPaused = false;
+            isDictationRunning = false;
+            
+            document.getElementById("wordsGrid").innerHTML = `
+                <div style="text-align: center; color: #9fa8da; padding: 30px 15px;">
+                    <i class="fas fa-spell-check" style="font-size: 40px; margin-bottom: 10px; display: block;"></i>
+                    <div style="font-size: 16px; font-weight: 500;">点击"开始"按钮</div>
+                    <div style="font-size: 12px; margin-top: 5px;">系统将随机选取词语并朗读</div>
+                </div>
+            `;
+            
+            document.getElementById("startBtn").disabled = !voiceTested;
+            document.getElementById("pauseBtn").disabled = true;
+            document.getElementById("pauseBtn").innerHTML = '<i class="fas fa-pause-circle"></i><span>暂停</span>';
+            document.getElementById("showAnswerBtn").disabled = false;
+            document.getElementById("completionMessage").style.display = "none";
+            
+            updateProgress();
+            
+            document.getElementById("wordCount").value = 10;
+            document.getElementById("readTimes").value = 2;
+            document.getElementById("intervalTime").value = 4;
+        }
+        
+        function updateProgress() {
+            const total = selectedWords.length;
+            const current = currentWordIndex;
+            const progress = total > 0 ? Math.round((current / total) * 100) : 0;
+            
+            document.getElementById("progressText").textContent = `${current}/${total}`;
+            document.getElementById("progressFill").style.width = `${progress}%`;
+        }
+        
+        // ========== 页面加载完成时初始化 ==========
+        document.addEventListener("DOMContentLoaded", initPage);
+        
+        // iOS语音初始化
+        document.addEventListener("click", function initVoices() {
+            if (voiceSupported && speechSynthesis.getVoices().length === 0) {
+                const tempUtterance = new SpeechSynthesisUtterance("");
+                speechSynthesis.speak(tempUtterance);
+                speechSynthesis.cancel();
+            }
+            document.removeEventListener("click", initVoices);
+        });
+    </script>
+</body>
+</html>
