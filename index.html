@@ -3,1030 +3,790 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>二年级语文听写</title>
+    <title>二年级语文看拼音写词语游戏</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* 移动端优化样式 - 紧凑版 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            touch-action: manipulation;
+            font-family: 'Arial Rounded MT Bold', 'Microsoft YaHei', sans-serif;
         }
-
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", STHeiti, "Microsoft YaHei", sans-serif;
-            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
-            padding: 12px;
-            -webkit-font-smoothing: antialiased;
-            -webkit-tap-highlight-color: transparent;
+            padding: 20px;
+            color: #333;
         }
-
-        /* 容器 */
+        
         .container {
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
-        }
-
-        /* 标题 */
-        .header {
-            text-align: center;
-            margin-bottom: 15px;
-            padding: 15px 12px;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            border: 2px solid #64b5f6;
-            position: relative;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             overflow: hidden;
+            padding: 20px;
         }
-
-        .header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 6px;
-            background: linear-gradient(90deg, #64b5f6, #ba68c8);
-        }
-
-        .title {
-            font-size: 24px;
-            color: #1565c0;
-            font-weight: 700;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .title i {
-            color: #e91e63;
-            font-size: 24px;
-        }
-
-        .subtitle {
-            font-size: 14px;
-            color: #5c6bc0;
-            font-weight: 500;
-        }
-
-        /* 设置区域 */
-        .settings {
-            background: white;
-            border-radius: 16px;
-            padding: 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-
-        .settings-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .setting-item {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .setting-label {
-            font-size: 14px;
-            color: #2c387e;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .setting-label i {
-            color: #5c6bc0;
-            font-size: 14px;
-        }
-
-        .setting-control {
-            width: 100%;
-        }
-
-        .number-input, .select-input {
-            width: 100%;
-            padding: 10px 8px;
-            font-size: 15px;
-            border: 2px solid #bbdefb;
-            border-radius: 10px;
-            background: #f5f9ff;
+        
+        header {
             text-align: center;
-            font-weight: 600;
-            color: #1a237e;
-            -webkit-appearance: none;
-            appearance: none;
+            padding: 20px;
+            background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            border-radius: 15px 15px 0 0;
+            margin: -20px -20px 20px -20px;
         }
-
-        .number-input:focus, .select-input:focus {
-            outline: none;
-            border-color: #5c6bc0;
-            box-shadow: 0 0 0 2px rgba(92, 107, 192, 0.2);
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
-
-        /* 按钮区域 */
-        .buttons-row {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
+        
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 10px;
         }
-
-        .btn {
-            padding: 12px 6px;
-            font-size: 14px;
-            border-radius: 10px;
-            border: none;
-            font-weight: 600;
+        
+        .control-panel {
+            background-color: #f0f8ff;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 2px solid #d1e7ff;
+        }
+        
+        .control-title {
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 15px;
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .control-title i {
+            color: #4b6cb7;
+        }
+        
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
-            cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
-            touch-action: manipulation;
-            min-height: 60px;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-
-        .btn:active {
-            transform: scale(0.96);
-            box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
         }
-
-        .btn i {
-            font-size: 16px;
+        
+        button:active {
+            transform: translateY(1px);
         }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #448aff 0%, #2979ff 100%);
+        
+        .primary-btn {
+            background: linear-gradient(90deg, #4b6cb7 0%, #3a56a4 100%);
             color: white;
+            flex: 1;
+            min-width: 180px;
         }
-
-        .btn-secondary {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+        
+        .secondary-btn {
+            background: linear-gradient(90deg, #2ecc71 0%, #27ae60 100%);
             color: white;
+            flex: 1;
+            min-width: 180px;
         }
-
-        .btn-success {
-            background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+        
+        .danger-btn {
+            background: linear-gradient(90deg, #e74c3c 0%, #c0392b 100%);
             color: white;
+            flex: 1;
+            min-width: 180px;
         }
-
-        .btn-warning {
-            background: linear-gradient(135deg, #ffa726 0%, #f57c00 100%);
-            color: white;
-        }
-
-        .btn:disabled {
-            background: #b0bec5;
-            cursor: not-allowed;
-            transform: none !important;
-            box-shadow: none !important;
-            opacity: 0.7;
-        }
-
-        /* 进度条 */
-        .progress-container {
-            margin: 15px 0;
-        }
-
-        .progress-label {
+        
+        .count-selector {
             display: flex;
-            justify-content: space-between;
-            font-size: 14px;
-            color: #2c387e;
-            font-weight: 600;
+            align-items: center;
+            gap: 15px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .count-selector label {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .count-selector select {
+            padding: 10px 15px;
+            border-radius: 10px;
+            border: 2px solid #4b6cb7;
+            font-size: 16px;
+            background-color: white;
+            color: #333;
+        }
+        
+        .word-list {
+            margin-top: 20px;
+        }
+        
+        .word-title {
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .word-title i {
+            color: #4b6cb7;
+        }
+        
+        .words-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .word-card {
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 2px solid #e3f2fd;
+            transition: all 0.3s ease;
+        }
+        
+        .word-card:hover {
+            border-color: #4b6cb7;
+            transform: translateY(-5px);
+        }
+        
+        .pinyin {
+            font-size: 24px;
+            color: #e74c3c;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            background-color: #fff5f5;
+            border-radius: 10px;
+        }
+        
+        .answer {
+            font-size: 28px;
+            color: #27ae60;
+            text-align: center;
+            font-weight: bold;
+            min-height: 40px;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #f8fff8;
+            border: 2px dashed #2ecc71;
+            display: none;
+        }
+        
+        .answer.show {
+            display: block;
+        }
+        
+        .instructions {
+            background-color: #fff8e1;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            border-left: 5px solid #ffc107;
+        }
+        
+        .instructions h3 {
+            color: #e67e22;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+            line-height: 1.6;
+        }
+        
+        .instructions li {
             margin-bottom: 8px;
         }
-
-        .progress-bar {
-            height: 10px;
-            background: #e3f2fd;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #448aff, #2979ff);
-            border-radius: 5px;
-            width: 0%;
-            transition: width 0.4s ease;
-        }
-
-        /* 词语区域 */
-        .words-container {
-            background: white;
-            border-radius: 16px;
-            padding: 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            min-height: 180px;
-        }
-
-        .words-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 12px;
-        }
-
-        .word-card {
-            background: #f9f9ff;
-            border-radius: 12px;
-            padding: 15px 10px;
-            text-align: center;
-            border: 2px solid #e3f2fd;
-            position: relative;
-            transition: all 0.2s;
-        }
-
-        .word-card:active {
-            transform: scale(0.98);
-        }
-
-        /* 拼音和喇叭按钮区域 */
-        .pinyin-container {
+        
+        .stats {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            padding: 0 5px;
-        }
-
-        .pinyin {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
             font-size: 16px;
-            color: #e91e63;
-            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .stats div {
+            text-align: center;
             flex: 1;
         }
-
-        /* 喇叭按钮 - 设计得大一些方便点击 */
-        .speaker-btn {
-            background: #448aff;
-            color: white;
-            border: none;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 2px 6px rgba(68, 138, 255, 0.3);
-            transition: all 0.2s;
-            font-size: 16px;
-            flex-shrink: 0;
+        
+        .stats span {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4b6cb7;
+            display: block;
         }
-
-        .speaker-btn:active {
-            transform: scale(0.9);
-            box-shadow: 0 1px 3px rgba(68, 138, 255, 0.3);
-        }
-
-        /* 答案区域 */
-        .character {
-            font-size: 22px;
-            min-height: 32px;
-            line-height: 32px;
-            border-bottom: 2px solid #448aff;
-            color: #1a237e;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        .character.answered {
-            color: #2e7d32;
-            border-bottom-color: #4caf50;
-        }
-
-        /* 使用说明 */
-        .instructions {
-            background: linear-gradient(135deg, #fff3e0, #ffecb3);
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
-            border: 2px solid #ffb74d;
-        }
-
-        .instructions-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-            color: #e65100;
-            font-weight: 600;
-        }
-
-        .instructions-content {
-            font-size: 14px;
-            color: #e65100;
-            line-height: 1.5;
-        }
-
-        .instructions-content ol {
-            padding-left: 20px;
-            margin: 10px 0;
-        }
-
-        .instructions-content li {
-            margin-bottom: 8px;
-        }
-
-        /* 底部信息 */
-        .footer {
+        
+        footer {
             text-align: center;
-            color: #5c6bc0;
-            font-size: 12px;
-            margin-top: 20px;
-            padding: 10px;
-            opacity: 0.8;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #7f8c8d;
+            font-size: 14px;
         }
-
-        /* 移动端优化 */
-        @media (max-width: 480px) {
-            .title {
-                font-size: 20px;
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
             }
             
-            .settings-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
+            h1 {
+                font-size: 24px;
             }
             
-            .buttons-row {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
-            }
-            
-            .words-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-            
-            .word-card {
-                padding: 12px 8px;
-            }
-            
-            .pinyin {
-                font-size: 14px;
-            }
-            
-            .character {
-                font-size: 20px;
-            }
-            
-            .btn {
-                padding: 10px 4px;
-                font-size: 13px;
-                min-height: 55px;
-            }
-            
-            .btn i {
-                font-size: 14px;
-            }
-            
-            .speaker-btn {
-                width: 32px;
-                height: 32px;
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .words-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .title {
-                font-size: 18px;
+            .button-group {
                 flex-direction: column;
-                gap: 5px;
             }
             
-            .buttons-row {
+            button {
+                width: 100%;
+            }
+            
+            .words-container {
                 grid-template-columns: 1fr;
             }
+            
+            .stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+        
+        .highlight {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .lesson-tag {
+            display: inline-block;
+            background-color: #e3f2fd;
+            color: #1976d2;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- 头部标题 -->
-        <div class="header">
-            <div class="title">
-                <i class="fas fa-book-open"></i>
-                <span id="pageTitle">二年级语文听写</span>
-                <i class="fas fa-pencil-alt"></i>
+        <header>
+            <h1><i class="fas fa-book-open"></i> 二年级语文看拼音写词语</h1>
+            <p class="subtitle">人教版二年级上册 | 语文词语听写练习</p>
+        </header>
+        
+        <div class="control-panel">
+            <h2 class="control-title"><i class="fas fa-cogs"></i> 家长控制面板</h2>
+            
+            <div class="button-group">
+                <button class="primary-btn" id="generateBtn">
+                    <i class="fas fa-random"></i> 随机出题
+                </button>
+                <button class="secondary-btn" id="showAllBtn">
+                    <i class="fas fa-eye"></i> 显示全部答案
+                </button>
+                <button class="danger-btn" id="hideAllBtn">
+                    <i class="fas fa-eye-slash"></i> 隐藏全部答案
+                </button>
             </div>
-            <div class="subtitle">每个词语可单独点击喇叭朗读</div>
+            
+            <div class="count-selector">
+                <label for="wordCount"><i class="fas fa-list-ol"></i> 每次出题数量：</label>
+                <select id="wordCount">
+                    <option value="5">5个词语</option>
+                    <option value="6">6个词语</option>
+                    <option value="7">7个词语</option>
+                    <option value="8" selected>8个词语</option>
+                    <option value="9">9个词语</option>
+                    <option value="10">10个词语</option>
+                </select>
+                
+                <div style="margin-left: auto; font-size: 14px; color: #7f8c8d;">
+                    共 <span class="highlight" id="totalWords">0</span> 个词语
+                </div>
+            </div>
+            
+            <div class="stats">
+                <div>
+                    <span id="currentCount">0</span>
+                    当前题目数
+                </div>
+                <div>
+                    <span id="lessonCount">24</span>
+                    涉及课文数
+                </div>
+                <div>
+                    <span id="practiceCount">0</span>
+                    累计练习次数
+                </div>
+            </div>
         </div>
-
-        <!-- 使用说明 -->
+        
+        <div class="word-list">
+            <h2 class="word-title"><i class="fas fa-pencil-alt"></i> 看拼音写词语</h2>
+            <p style="text-align: center; margin-bottom: 20px; color: #7f8c8d;">
+                请家长朗读拼音，学生在纸上写出词语，然后点击拼音卡片查看答案
+            </p>
+            
+            <div class="words-container" id="wordsContainer">
+                <!-- 词语卡片将动态生成在这里 -->
+                <div class="placeholder" style="text-align: center; padding: 40px; color: #95a5a6;">
+                    <i class="fas fa-hand-point-up" style="font-size: 48px; margin-bottom: 15px;"></i>
+                    <p>点击上方"随机出题"按钮开始练习</p>
+                </div>
+            </div>
+        </div>
+        
         <div class="instructions">
-            <div class="instructions-header">
-                <i class="fas fa-info-circle"></i>
-                <span>使用说明</span>
-            </div>
-            <div class="instructions-content">
-                <ol>
-                    <li>点击"开始"按钮，系统会自动朗读词语（需要允许浏览器语音权限）</li>
-                    <li><strong>如果自动朗读没有声音</strong>，可以点击每个词语旁边的喇叭按钮</li>
-                    <li>喇叭按钮会调用手机系统的朗读功能，通常比浏览器更稳定</li>
-                    <li>完成后点击"答案"按钮核对结果</li>
-                </ol>
-            </div>
+            <h3><i class="fas fa-info-circle"></i> 使用说明</h3>
+            <ol>
+                <li>点击"随机出题"按钮，系统会从二年级上册所有课文中随机抽取词语</li>
+                <li>家长根据显示的拼音向孩子朗读（可重复朗读）</li>
+                <li>孩子在纸上写出对应的词语</li>
+                <li>点击拼音卡片可以查看正确答案，核对孩子的答案</li>
+                <li>可以使用"显示全部答案"和"隐藏全部答案"按钮批量操作</li>
+                <li>每次可以抽取5-10个词语进行练习，建议每天练习一次</li>
+            </ol>
         </div>
-
-        <!-- 设置区域 -->
-        <div class="settings">
-            <!-- 设置项 - 三列布局 -->
-            <div class="settings-grid">
-                <div class="setting-item">
-                    <div class="setting-label">
-                        <i class="fas fa-list-ol"></i>
-                        <span>数量</span>
-                    </div>
-                    <div class="setting-control">
-                        <input type="number" class="number-input" id="wordCount" min="5" max="30" value="10">
-                    </div>
-                </div>
-
-                <div class="setting-item">
-                    <div class="setting-label">
-                        <i class="fas fa-redo-alt"></i>
-                        <span>遍数</span>
-                    </div>
-                    <div class="setting-control">
-                        <select class="select-input" id="readTimes">
-                            <option value="1">1遍</option>
-                            <option value="2" selected>2遍</option>
-                            <option value="3">3遍</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="setting-item">
-                    <div class="setting-label">
-                        <i class="fas fa-clock"></i>
-                        <span>间隔</span>
-                    </div>
-                    <div class="setting-control">
-                        <select class="select-input" id="intervalTime">
-                            <option value="3">3秒</option>
-                            <option value="4" selected>4秒</option>
-                            <option value="5">5秒</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 按钮组 - 单排四个按钮 -->
-            <div class="buttons-row">
-                <button class="btn btn-primary" id="startBtn">
-                    <i class="fas fa-play-circle"></i>
-                    <span>开始</span>
-                </button>
-                <button class="btn btn-secondary" id="pauseBtn" disabled>
-                    <i class="fas fa-pause-circle"></i>
-                    <span>暂停</span>
-                </button>
-                <button class="btn btn-warning" id="showAnswerBtn">
-                    <i class="fas fa-check-circle"></i>
-                    <span>答案</span>
-                </button>
-                <button class="btn btn-success" id="resetBtn">
-                    <i class="fas fa-redo"></i>
-                    <span>重置</span>
-                </button>
-            </div>
-        </div>
-
-        <!-- 进度条 -->
-        <div class="progress-container">
-            <div class="progress-label">
-                <span>听写进度</span>
-                <span id="progressText">0/0</span>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-        </div>
-
-        <!-- 词语显示区域 -->
-        <div class="words-container">
-            <div class="words-grid" id="wordsGrid">
-                <!-- 词语卡片将在这里动态生成 -->
-                <div style="text-align: center; color: #9fa8da; padding: 30px 15px;">
-                    <i class="fas fa-spell-check" style="font-size: 40px; margin-bottom: 10px; display: block;"></i>
-                    <div style="font-size: 16px; font-weight: 500;">点击"开始"按钮</div>
-                    <div style="font-size: 12px; margin-top: 5px;">系统将随机选取词语并朗读</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 底部信息 -->
-        <div class="footer">
-            <div>二年级上册语文听写练习</div>
-            <div style="margin-top: 3px; font-size: 11px;">点击每个词语旁边的喇叭按钮可以单独朗读</div>
-        </div>
+        
+        <footer>
+            <p>© 2025 二年级语文上册 | 看拼音写词语练习游戏 | 设计用于微信家长群</p>
+            <p>基于人教版二年级语文上册词语表制作</p>
+        </footer>
     </div>
 
     <script>
-        // ========== 核心配置：二年级上册精选词语库 ==========
-        const wordLibrary = [
-            { pinyin: "mā ma", word: "妈妈" },
-            { pinyin: "bà ba", word: "爸爸" },
-            { pinyin: "wǒ men", word: "我们" },
-            { pinyin: "tā men", word: "他们" },
-            { pinyin: "shēn zi", word: "身子" },
-            { pinyin: "kàn jiàn", word: "看见" },
-            { pinyin: "nǎ lǐ", word: "哪里" },
-            { pinyin: "nà biān", word: "那边" },
-            { pinyin: "shén me", word: "什么" },
-            { pinyin: "tài yáng", word: "太阳" },
-            { pinyin: "tiān kōng", word: "天空" },
-            { pinyin: "yī qǐ", word: "一起" },
-            { pinyin: "dōng tiān", word: "冬天" },
-            { pinyin: "huā duǒ", word: "花朵" },
-            { pinyin: "hǎi yáng", word: "海洋" },
-            { pinyin: "xǔ duō", word: "许多" },
-            { pinyin: "tián dì", word: "田地" },
-            { pinyin: "gōng zuò", word: "工作" },
-            { pinyin: "rú guǒ", word: "如果" },
-            { pinyin: "yǐ jīng", word: "已经" },
-            { pinyin: "zhǎng dà", word: "长大" },
-            { pinyin: "zì jǐ", word: "自己" },
-            { pinyin: "dòng wù", word: "动物" },
-            { pinyin: "zhī shi", word: "知识" },
-            { pinyin: "měi lì", word: "美丽" },
-            { pinyin: "xià lái", word: "下来" },
-            { pinyin: "gāo xìng", word: "高兴" },
-            { pinyin: "gē ge", word: "哥哥" },
-            { pinyin: "qiū qiān", word: "秋千" },
-            { pinyin: "bǎo bèi", word: "宝贝" },
-            { pinyin: "huí lái", word: "回来" },
-            { pinyin: "tiān qì", word: "天气" },
-            { pinyin: "gào su", word: "告诉" },
-            { pinyin: "míng zi", word: "名字" },
-            { pinyin: "xīng xing", word: "星星" },
-            { pinyin: "wǎn shang", word: "晚上" },
-            { pinyin: "nǎi nai", word: "奶奶" },
-            { pinyin: "yé ye", word: "爷爷" },
-            { pinyin: "zhōng jiān", word: "中间" },
-            { pinyin: "shān dǐng", word: "山顶" },
-            { pinyin: "shān tóu", word: "山头" },
-            { pinyin: "yún hǎi", word: "云海" },
-            { pinyin: "qián fāng", word: "前方" },
-            { pinyin: "shù mù", word: "树木" },
-            { pinyin: "zhōng wǔ", word: "中午" },
-            { pinyin: "yǎn qián", word: "眼前" },
-            { pinyin: "dì fang", word: "地方" },
-            { pinyin: "shuǐ guǒ", word: "水果" },
-            { pinyin: "chéng shì", word: "城市" },
-            { pinyin: "kōng qì", word: "空气" },
-            { pinyin: "huí dá", word: "回答" },
-            { pinyin: "dà huà", word: "大话" },
-            { pinyin: "nà me", word: "那么" },
-            { pinyin: "tái tóu", word: "抬头" },
-            { pinyin: "qián miàn", word: "前面" },
-            { pinyin: "chū qù", word: "出去" },
-            { pinyin: "zhī dào", word: "知道" },
-            { pinyin: "gǎn kuài", word: "赶快" },
-            { pinyin: "míng tiān", word: "明天" },
-            { pinyin: "hǎo xiàng", word: "好像" },
-            { pinyin: "cóng qián", word: "从前" },
-            { pinyin: "yǐ hòu", word: "以后" },
-            { pinyin: "yè zi", word: "叶子" },
-            { pinyin: "chóng zi", word: "虫子" },
-            { pinyin: "lín jū", word: "邻居" },
-            { pinyin: "qí guài", word: "奇怪" },
-            { pinyin: "zhōng guó", word: "中国" },
-            { pinyin: "shèng lì", word: "胜利" },
-            { pinyin: "dào lù", word: "道路" },
-            { pinyin: "hóng jūn", word: "红军" },
-            { pinyin: "zhàn shì", word: "战士" },
-            { pinyin: "yī kuài ér", word: "一块儿" },
-            { pinyin: "bái tiān", word: "白天" },
-            { pinyin: "nán wàng", word: "难忘" },
-            { pinyin: "rén mín", word: "人民" },
-            { pinyin: "yīn wèi", word: "因为" },
-            { pinyin: "huān lè", word: "欢乐" },
-            { pinyin: "kāi xīn", word: "开心" },
-            { pinyin: "xiàn zài", word: "现在" },
-            { pinyin: "péng you", word: "朋友" },
-            { pinyin: "bǎo hù", word: "保护" },
-            { pinyin: "sì jì", word: "四季" }
+        // 二年级语文上册词语数据
+        const wordData = [
+            // 课1
+            { pinyin: "mā ma", word: "妈妈", lesson: "课1" },
+            { pinyin: "shēn zi", word: "身子", lesson: "课1" },
+            { pinyin: "tā men", word: "他们", lesson: "课1" },
+            { pinyin: "kàn jiàn", word: "看见", lesson: "课1" },
+            { pinyin: "wǒ men", word: "我们", lesson: "课1" },
+            { pinyin: "nǎ lǐ", word: "哪里", lesson: "课1" },
+            { pinyin: "nà biān", word: "那边", lesson: "课1" },
+            { pinyin: "xuě bái", word: "雪白", lesson: "课1" },
+            { pinyin: "guò qù", word: "过去", lesson: "课1" },
+            { pinyin: "hái zi", word: "孩子", lesson: "课1" },
+            { pinyin: "shén me", word: "什么", lesson: "课1" },
+            
+            // 课2
+            { pinyin: "tài yáng", word: "太阳", lesson: "课2" },
+            { pinyin: "tiān kōng", word: "天空", lesson: "课2" },
+            { pinyin: "yī qǐ", word: "一起", lesson: "课2" },
+            { pinyin: "dōng tiān", word: "冬天", lesson: "课2" },
+            { pinyin: "huā duǒ", word: "花朵", lesson: "课2" },
+            { pinyin: "chí zi", word: "池子", lesson: "课2" },
+            { pinyin: "jiāng hé", word: "江河", lesson: "课2" },
+            { pinyin: "hǎi yáng", word: "海洋", lesson: "课2" },
+            { pinyin: "xǔ duō", word: "许多", lesson: "课2" },
+            { pinyin: "tián dì", word: "田地", lesson: "课2" },
+            { pinyin: "gōng zuò", word: "工作", lesson: "课2" },
+            { pinyin: "bàn fǎ", word: "办法", lesson: "课2" },
+            { pinyin: "nǐ men", word: "你们", lesson: "课2" },
+            
+            // 课3
+            { pinyin: "rú guǒ", word: "如果", lesson: "课3" },
+            { pinyin: "yǐ jīng", word: "已经", lesson: "课3" },
+            { pinyin: "zhǎng dà", word: "长大", lesson: "课3" },
+            { pinyin: "gào bié", word: "告别", lesson: "课3" },
+            { pinyin: "sì hǎi wéi jiā", word: "四海为家", lesson: "课3" },
+            { pinyin: "zì jǐ", word: "自己", lesson: "课3" },
+            { pinyin: "chū fā", word: "出发", lesson: "课3" },
+            { pinyin: "dòng wù", word: "动物", lesson: "课3" },
+            { pinyin: "dǎn zi", word: "胆子", lesson: "课3" },
+            { pinyin: "dù zi", word: "肚子", lesson: "课3" },
+            { pinyin: "nà lǐ", word: "那里", lesson: "课3" },
+            { pinyin: "zhī shi", word: "知识", lesson: "课3" },
+            
+            // 课4
+            { pinyin: "tiān shàng", word: "天上", lesson: "课4" },
+            { pinyin: "měi lì", word: "美丽", lesson: "课4" },
+            { pinyin: "bà ba", word: "爸爸", lesson: "课4" },
+            { pinyin: "xià lái", word: "下来", lesson: "课4" },
+            { pinyin: "bù yòng", word: "不用", lesson: "课4" },
+            { pinyin: "gāo xìng", word: "高兴", lesson: "课4" },
+            { pinyin: "gē ge", word: "哥哥", lesson: "课4" },
+            { pinyin: "qiū qiān", word: "秋千", lesson: "课4" },
+            { pinyin: "cǎi yún", word: "彩云", lesson: "课4" },
+            
+            // 课5
+            { pinyin: "bǎo bèi", word: "宝贝", lesson: "课5" },
+            { pinyin: "gàn huó", word: "干活", lesson: "课5" },
+            { pinyin: "huí lái", word: "回来", lesson: "课5" },
+            { pinyin: "yī xiē", word: "一些", lesson: "课5" },
+            { pinyin: "tiān qì", word: "天气", lesson: "课5" },
+            { pinyin: "huān kuài", word: "欢快", lesson: "课5" },
+            { pinyin: "tā men", word: "它们", lesson: "课5" },
+            { pinyin: "gào su", word: "告诉", lesson: "课5" },
+            { pinyin: "míng zi", word: "名字", lesson: "课5" },
+            { pinyin: "chū mén", word: "出门", lesson: "课5" },
+            
+            // 课6
+            { pinyin: "xīng xing", word: "星星", lesson: "课6" },
+            { pinyin: "wǎn shang", word: "晚上", lesson: "课6" },
+            { pinyin: "wú shù", word: "无数", lesson: "课6" },
+            { pinyin: "nǎi nai", word: "奶奶", lesson: "课6" },
+            { pinyin: "zhōng jiān", word: "中间", lesson: "课6" },
+            { pinyin: "zǒng shì", word: "总是", lesson: "课6" },
+            { pinyin: "yé ye", word: "爷爷", lesson: "课6" },
+            { pinyin: "běi biān", word: "北边", lesson: "课6" },
+            { pinyin: "sháo zi", word: "勺子", lesson: "课6" },
+            { pinyin: "zhuàn dòng", word: "转动", lesson: "课6" },
+            { pinyin: "zhè ge", word: "这个", lesson: "课6" },
+            { pinyin: "hòu lái", word: "后来", lesson: "课6" },
+            
+            // 课8
+            { pinyin: "nà xiē", word: "那些", lesson: "课8" },
+            { pinyin: "shān dǐng", word: "山顶", lesson: "课8" },
+            { pinyin: "shān tóu", word: "山头", lesson: "课8" },
+            { pinyin: "yún hǎi", word: "云海", lesson: "课8" },
+            { pinyin: "xiān rén", word: "仙人", lesson: "课8" },
+            { pinyin: "qián fāng", word: "前方", lesson: "课8" },
+            { pinyin: "xiān nǚ", word: "仙女", lesson: "课8" },
+            
+            // 课9
+            { pinyin: "shān qū", word: "山区", lesson: "课9" },
+            { pinyin: "qún shān", word: "群山", lesson: "课9" },
+            { pinyin: "shù mù", word: "树木", lesson: "课9" },
+            { pinyin: "dēng guāng", word: "灯光", lesson: "课9" },
+            { pinyin: "zhōng wǔ", word: "中午", lesson: "课9" },
+            { pinyin: "yǎn qián", word: "眼前", lesson: "课9" },
+            { pinyin: "xì yǔ", word: "细雨", lesson: "课9" },
+            { pinyin: "fēng guāng", word: "风光", lesson: "课9" },
+            { pinyin: "zhōng wài", word: "中外", lesson: "课9" },
+            
+            // 课10
+            { pinyin: "dì fang", word: "地方", lesson: "课10" },
+            { pinyin: "shuǐ guǒ", word: "水果", lesson: "课10" },
+            { pinyin: "yuè fèn", word: "月份", lesson: "课10" },
+            { pinyin: "zhī yè", word: "枝叶", lesson: "课10" },
+            { pinyin: "wǔ guāng shí sè", word: "五光十色", lesson: "课10" },
+            { pinyin: "hào kè", word: "好客", lesson: "课10" },
+            { pinyin: "lǎo xiāng", word: "老乡", lesson: "课10" },
+            { pinyin: "yǒu de", word: "有的", lesson: "课10" },
+            { pinyin: "chéng shì", word: "城市", lesson: "课10" },
+            { pinyin: "kōng qì", word: "空气", lesson: "课10" },
+            { pinyin: "shuǐ fèn", word: "水分", lesson: "课10" },
+            { pinyin: "zhè lǐ", word: "这里", lesson: "课10" },
+            { pinyin: "wèi dào", word: "味道", lesson: "课10" },
+            { pinyin: "yǒu míng", word: "有名", lesson: "课10" },
+            
+            // 课11
+            { pinyin: "zuò jǐng guān tiān", word: "坐井观天", lesson: "课11" },
+            { pinyin: "nǎ ér", word: "哪儿", lesson: "课11" },
+            { pinyin: "huí dá", word: "回答", lesson: "课11" },
+            { pinyin: "dà huà", word: "大话", lesson: "课11" },
+            { pinyin: "bù guò", word: "不过", lesson: "课11" },
+            { pinyin: "nà me", word: "那么", lesson: "课11" },
+            { pinyin: "tái tóu", word: "抬头", lesson: "课11" },
+            
+            // 课12
+            { pinyin: "dāng zuò", word: "当作", lesson: "课12" },
+            { pinyin: "qián miàn", word: "前面", lesson: "课12" },
+            { pinyin: "miàn duì miàn", word: "面对面", lesson: "课12" },
+            { pinyin: "chū qù", word: "出去", lesson: "课12" },
+            { pinyin: "guò dōng", word: "过冬", lesson: "课12" },
+            { pinyin: "zhī dào", word: "知道", lesson: "课12" },
+            { pinyin: "gǎn kuài", word: "赶快", lesson: "课12" },
+            { pinyin: "zhèng hǎo", word: "正好", lesson: "课12" },
+            { pinyin: "míng tiān", word: "明天", lesson: "课12" },
+            { pinyin: "qīng zǎo", word: "清早", lesson: "课12" },
+            { pinyin: "hǎo xiàng", word: "好像", lesson: "课12" },
+            { pinyin: "yī yàng", word: "一样", lesson: "课12" },
+            { pinyin: "tiān liàng", word: "天亮", lesson: "课12" },
+            { pinyin: "chū lái", word: "出来", lesson: "课12" },
+            
+            // 课13
+            { pinyin: "cóng qián", word: "从前", lesson: "课13" },
+            { pinyin: "yǐ hòu", word: "以后", lesson: "课13" },
+            { pinyin: "duō me", word: "多么", lesson: "课13" },
+            { pinyin: "nà ge", word: "那个", lesson: "课13" },
+            { pinyin: "yè zi", word: "叶子", lesson: "课13" },
+            { pinyin: "chóng zi", word: "虫子", lesson: "课13" },
+            { pinyin: "zì yán zì yǔ", word: "自言自语", lesson: "课13" },
+            { pinyin: "lín jū", word: "邻居", lesson: "课13" },
+            { pinyin: "qí guài", word: "奇怪", lesson: "课13" },
+            
+            // 课14
+            { pinyin: "nián dài", word: "年代", lesson: "课14" },
+            { pinyin: "gèng jiā", word: "更加", lesson: "课14" },
+            { pinyin: "míng liàng", word: "明亮", lesson: "课14" },
+            { pinyin: "xīng xīng zhī huǒ", word: "星星之火", lesson: "课14" },
+            { pinyin: "zhōng guó", word: "中国", lesson: "课14" },
+            { pinyin: "shèng lì", word: "胜利", lesson: "课14" },
+            { pinyin: "dào lù", word: "道路", lesson: "课14" },
+            
+            // 课15
+            { pinyin: "tóng zhì", word: "同志", lesson: "课15" },
+            { pinyin: "hóng jūn", word: "红军", lesson: "课15" },
+            { pinyin: "dí rén", word: "敌人", lesson: "课15" },
+            { pinyin: "shēng chǎn", word: "生产", lesson: "课15" },
+            { pinyin: "cháng cháng", word: "常常", lesson: "课15" },
+            { pinyin: "lái huí", word: "来回", lesson: "课15" },
+            { pinyin: "fēi cháng", word: "非常", lesson: "课15" },
+            { pinyin: "zhàn shì", word: "战士", lesson: "课15" },
+            { pinyin: "yī kuài ér", word: "一块儿", lesson: "课15" },
+            { pinyin: "bái tiān", word: "白天", lesson: "课15" },
+            
+            // 课16
+            { pinyin: "nán wàng", word: "难忘", lesson: "课16" },
+            { pinyin: "huǒ hóng", word: "火红", lesson: "课16" },
+            { pinyin: "rén mín", word: "人民", lesson: "课16" },
+            { pinyin: "yīn wèi", word: "因为", lesson: "课16" },
+            { pinyin: "zǒng lǐ", word: "总理", lesson: "课16" },
+            { pinyin: "rén men", word: "人们", lesson: "课16" },
+            { pinyin: "sì miàn bā fāng", word: "四面八方", lesson: "课16" },
+            { pinyin: "wèi le", word: "为了", lesson: "课16" },
+            { pinyin: "rén qún", word: "人群", lesson: "课16" },
+            { pinyin: "huān lè", word: "欢乐", lesson: "课16" },
+            { pinyin: "kāi xīn", word: "开心", lesson: "课16" },
+            
+            // 课17
+            { pinyin: "yóu yú", word: "由于", lesson: "课17" },
+            { pinyin: "nián qīng", word: "年轻", lesson: "课17" },
+            { pinyin: "gòng chǎn dǎng yuán", word: "共产党员", lesson: "课17" },
+            { pinyin: "gòng chǎn dǎng", word: "共产党", lesson: "课17" },
+            { pinyin: "xiàn zài", word: "现在", lesson: "课17" },
+            { pinyin: "yī diǎn ér", word: "一点儿", lesson: "课17" },
+            { pinyin: "xiāo xi", word: "消息", lesson: "课17" },
+            
+            // 课19
+            { pinyin: "yú shì", word: "于是", lesson: "课19" },
+            { pinyin: "wú lùn", word: "无论", lesson: "课19" },
+            { pinyin: "chuán zhī", word: "船只", lesson: "课19" },
+            { pinyin: "tóng shí", word: "同时", lesson: "课19" },
+            { pinyin: "xíng rén", word: "行人", lesson: "课19" },
+            { pinyin: "yī qiè", word: "一切", lesson: "课19" },
+            { pinyin: "shàng kōng", word: "上空", lesson: "课19" },
+            { pinyin: "kàn lái", word: "看来", lesson: "课19" },
+            { pinyin: "bù jiǔ", word: "不久", lesson: "课19" },
+            { pinyin: "lù shàng", word: "路上", lesson: "课19" },
+            { pinyin: "chū xiàn", word: "出现", lesson: "课19" },
+            { pinyin: "sàn bù", word: "散步", lesson: "课19" },
+            { pinyin: "xiāo shī", word: "消失", lesson: "课19" },
+            
+            // 课20
+            { pinyin: "kòng dì", word: "空地", lesson: "课20" },
+            { pinyin: "huǒ bàn", word: "伙伴", lesson: "课20" },
+            { pinyin: "chàng gē", word: "唱歌", lesson: "课20" },
+            { pinyin: "huí jiā", word: "回家", lesson: "课20" },
+            { pinyin: "yī huì ér", word: "一会儿", lesson: "课20" },
+            { pinyin: "zháo huǒ", word: "着火", lesson: "课20" },
+            { pinyin: "huǒ xīng", word: "火星", lesson: "课20" },
+            { pinyin: "yī biān", word: "一边", lesson: "课20" },
+            { pinyin: "lián máng", word: "连忙", lesson: "课20" },
+            { pinyin: "shù lín", word: "树林", lesson: "课20" },
+            { pinyin: "shuǐ qì", word: "水汽", lesson: "课20" },
+            { pinyin: "bái yún", word: "白云", lesson: "课20" },
+            
+            // 课21
+            { pinyin: "guǒ zi", word: "果子", lesson: "课21" },
+            { pinyin: "mù gōng", word: "木工", lesson: "课21" },
+            { pinyin: "shēn biān", word: "身边", lesson: "课21" },
+            { pinyin: "zǐ xì", word: "仔细", lesson: "课21" },
+            { pinyin: "néng gàn", word: "能干", lesson: "课21" },
+            { pinyin: "yǐ zi", word: "椅子", lesson: "课21" },
+            { pinyin: "zěn me", word: "怎么", lesson: "课21" },
+            { pinyin: "zì xìn", word: "自信", lesson: "课21" },
+            { pinyin: "cóng lái", word: "从来", lesson: "课21" },
+            { pinyin: "zhè me", word: "这么", lesson: "课21" },
+            
+            // 课22
+            { pinyin: "shàng miàn", word: "上面", lesson: "课22" },
+            { pinyin: "kuài lè", word: "快乐", lesson: "课22" },
+            { pinyin: "kě shì", word: "可是", lesson: "课22" },
+            { pinyin: "nán guò", word: "难过", lesson: "课22" },
+            { pinyin: "dàn shì", word: "但是", lesson: "课22" },
+            { pinyin: "hé hǎo", word: "和好", lesson: "课22" },
+            
+            // 课23
+            { pinyin: "yǎn lèi", word: "眼泪", lesson: "课23" },
+            { pinyin: "shuǐ huā", word: "水花", lesson: "课23" },
+            { pinyin: "qīng cǎo", word: "青草", lesson: "课23" },
+            { pinyin: "yóu xì", word: "游戏", lesson: "课23" },
+            { pinyin: "zhǐ yǒu", word: "只有", lesson: "课23" },
+            { pinyin: "kě ài", word: "可爱", lesson: "课23" },
+            { pinyin: "kě yǐ", word: "可以", lesson: "课23" },
+            { pinyin: "duō shǎo", word: "多少", lesson: "课23" },
+            { pinyin: "zán men", word: "咱们", lesson: "课23" },
+            { pinyin: "tián yě", word: "田野", lesson: "课23" },
+            { pinyin: "dà dì", word: "大地", lesson: "课23" },
+            { pinyin: "yuǎn fāng", word: "远方", lesson: "课23" },
+            
+            // 识字部分
+            { pinyin: "huā yuán", word: "花园", lesson: "识字1" },
+            { pinyin: "fēi niǎo", word: "飞鸟", lesson: "识字1" },
+            { pinyin: "hóng lǐng jīn", word: "红领巾", lesson: "识字1" },
+            { pinyin: "huān xiào", word: "欢笑", lesson: "识字1" },
+            
+            { pinyin: "yáng shù", word: "杨树", lesson: "识字2" },
+            { pinyin: "shù yè", word: "树叶", lesson: "识字2" },
+            { pinyin: "sōng bǎi", word: "松柏", lesson: "识字2" },
+            { pinyin: "huà shí", word: "化石", lesson: "识字2" },
+            { pinyin: "kāi huā", word: "开花", lesson: "识字2" },
+            
+            { pinyin: "pāi shǒu", word: "拍手", lesson: "识字3" },
+            { pinyin: "shì jiè", word: "世界", lesson: "识字3" },
+            { pinyin: "yún cǎi", word: "云彩", lesson: "识字3" },
+            { pinyin: "cóng lín", word: "丛林", lesson: "识字3" },
+            { pinyin: "zhú lín", word: "竹林", lesson: "识字3" },
+            { pinyin: "péng you", word: "朋友", lesson: "识字3" },
+            { pinyin: "bǎo hù", word: "保护", lesson: "识字3" },
+            
+            { pinyin: "sì jì", word: "四季", lesson: "识字4" },
+            { pinyin: "chūn fēng", word: "春风", lesson: "识字4" },
+            { pinyin: "nóng shì", word: "农事", lesson: "识字4" },
+            { pinyin: "yuè guāng", word: "月光", lesson: "识字4" },
+            { pinyin: "shēn tǐ", word: "身体", lesson: "识字4" },
+            { pinyin: "xīn kǔ", word: "辛苦", lesson: "识字4" },
+            { pinyin: "xīn lǐ", word: "心里", lesson: "识字4" },
+            { pinyin: "dà jiā", word: "大家", lesson: "识字4" }
         ];
 
-        // ========== 全局变量 ==========
-        let selectedWords = [];
-        let currentWordIndex = 0;
-        let currentReadTimes = 0;
-        let timer = null;
-        let isPaused = false;
-        let isDictationRunning = false;
-
-        // ========== 页面初始化 ==========
-        function initPage() {
-            // 设置页面标题
-            const now = new Date();
-            const month = now.getMonth() + 1;
-            const day = now.getDate();
-            const weekDays = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
-            const weekDay = weekDays[now.getDay()];
-            document.getElementById("pageTitle").innerText = `${month}月${day}日 ${weekDay}`;
-            
-            // 初始化事件监听
-            initEvents();
-        }
-
-        // 初始化事件监听
-        function initEvents() {
-            // 开始听写按钮
-            document.getElementById("startBtn").addEventListener("click", startDictation);
-            
-            // 暂停按钮
-            document.getElementById("pauseBtn").addEventListener("click", togglePause);
-            
-            // 显示答案按钮
-            document.getElementById("showAnswerBtn").addEventListener("click", showAnswer);
-            
-            // 重置按钮
-            document.getElementById("resetBtn").addEventListener("click", resetDictation);
-            
-            // 输入验证
-            document.getElementById("wordCount").addEventListener("change", function() {
-                let value = parseInt(this.value);
-                if (value < 5) this.value = 5;
-                if (value > 30) this.value = 30;
-            });
-            
-            // 页面可见性变化处理
-            document.addEventListener("visibilitychange", function() {
-                if (document.hidden && isDictationRunning && !isPaused) {
-                    togglePause();
-                }
-            });
-        }
-
-        // ========== 核心功能 ==========
-        function startDictation() {
-            if (isDictationRunning) return;
-            
-            document.getElementById("startBtn").disabled = true;
-            document.getElementById("pauseBtn").disabled = false;
-            document.getElementById("showAnswerBtn").disabled = false;
-            
-            const wordCount = parseInt(document.getElementById("wordCount").value);
-            const readTimes = parseInt(document.getElementById("readTimes").value);
-            const interval = parseInt(document.getElementById("intervalTime").value) * 1000;
-            
-            if (isNaN(wordCount) || wordCount < 5 || wordCount > 30) {
-                alert("请选择5-30个词语！");
-                document.getElementById("startBtn").disabled = false;
-                document.getElementById("pauseBtn").disabled = true;
-                return;
-            }
-            
-            selectedWords = [];
-            const tempLibrary = [...wordLibrary];
-            const count = Math.min(wordCount, wordLibrary.length);
-            
-            for (let i = 0; i < count; i++) {
-                const randomIndex = Math.floor(Math.random() * tempLibrary.length);
-                selectedWords.push(tempLibrary[randomIndex]);
-                tempLibrary.splice(randomIndex, 1);
-            }
-            
-            renderWordsGrid();
-            updateProgress();
-            
-            currentWordIndex = 0;
-            currentReadTimes = 0;
-            isPaused = false;
-            isDictationRunning = true;
-            
-            // 尝试自动朗读，但不依赖它
-            try {
-                playWord(interval, readTimes);
-            } catch (error) {
-                console.log("自动朗读失败，但用户仍可点击喇叭按钮手动朗读");
-                // 即使自动朗读失败，也继续显示词语
-                // 用户可以点击喇叭按钮手动朗读
-            }
+        // DOM元素
+        const generateBtn = document.getElementById('generateBtn');
+        const showAllBtn = document.getElementById('showAllBtn');
+        const hideAllBtn = document.getElementById('hideAllBtn');
+        const wordCountSelect = document.getElementById('wordCount');
+        const wordsContainer = document.getElementById('wordsContainer');
+        const totalWordsEl = document.getElementById('totalWords');
+        const currentCountEl = document.getElementById('currentCount');
+        const practiceCountEl = document.getElementById('practiceCount');
+        
+        // 初始化
+        let practiceCount = 0;
+        let currentWords = [];
+        
+        // 更新统计数据
+        function updateStats() {
+            totalWordsEl.textContent = wordData.length;
+            currentCountEl.textContent = currentWords.length;
+            practiceCountEl.textContent = practiceCount;
         }
         
-        function renderWordsGrid() {
-            const wordsGrid = document.getElementById("wordsGrid");
-            wordsGrid.innerHTML = "";
+        // 随机选择词语
+        function getRandomWords(count) {
+            // 创建一个副本，避免修改原数组
+            const shuffled = [...wordData].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+        
+        // 生成词语卡片
+        function generateWordCards(words) {
+            wordsContainer.innerHTML = '';
             
-            selectedWords.forEach((word, index) => {
-                const wordCard = document.createElement("div");
-                wordCard.className = "word-card";
-                wordCard.innerHTML = `
-                    <div class="pinyin-container">
-                        <div class="pinyin">${word.pinyin}</div>
-                        <button class="speaker-btn" onclick="speakWord('${word.word}', this)">
-                            <i class="fas fa-volume-up"></i>
-                        </button>
-                    </div>
-                    <div class="character" id="character-${index}"></div>
+            words.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'word-card';
+                card.innerHTML = `
+                    <div class="pinyin">${item.pinyin}</div>
+                    <div class="lesson-tag">${item.lesson}</div>
+                    <div class="answer" id="answer-${index}">${item.word}</div>
                 `;
-                wordsGrid.appendChild(wordCard);
-            });
-        }
-        
-        function playWord(interval, readTimes) {
-            if (isPaused) return;
-            
-            if (currentWordIndex >= selectedWords.length) {
-                finishDictation();
-                return;
-            }
-            
-            const word = selectedWords[currentWordIndex].word;
-            
-            // 尝试朗读，但忽略错误
-            try {
-                readWordAloud(word);
-            } catch (error) {
-                console.log("朗读失败，用户可以点击喇叭按钮");
-            }
-            
-            currentReadTimes++;
-            
-            if (currentReadTimes >= readTimes) {
-                currentWordIndex++;
-                currentReadTimes = 0;
-                updateProgress();
-            }
-            
-            timer = setTimeout(() => {
-                playWord(interval, readTimes);
-            }, interval);
-        }
-        
-        // 朗读词语函数 - 使用浏览器语音合成
-        function readWordAloud(word) {
-            if ('speechSynthesis' in window) {
-                // 停止之前的播报
-                window.speechSynthesis.cancel();
                 
-                const utterance = new SpeechSynthesisUtterance(word);
-                utterance.lang = "zh-CN";
-                utterance.volume = 1;
-                utterance.rate = 0.8;
-                utterance.pitch = 1.0;
+                // 点击拼音显示/隐藏答案
+                const pinyinEl = card.querySelector('.pinyin');
+                const answerEl = card.querySelector('.answer');
                 
-                // 尝试使用中文语音
-                const voices = speechSynthesis.getVoices();
-                const chineseVoice = voices.find(v => 
-                    v.lang.includes('zh') || 
-                    v.lang.includes('CN') || 
-                    v.name.includes('Chinese')
-                );
-                if (chineseVoice) utterance.voice = chineseVoice;
-                
-                window.speechSynthesis.speak(utterance);
-                return true;
-            }
-            return false;
-        }
-        
-        // 点击喇叭按钮时调用的函数
-        function speakWord(word, button) {
-            // 添加点击反馈
-            const originalHTML = button.innerHTML;
-            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-            
-            // 尝试多种朗读方法
-            const success = tryAllSpeechMethods(word);
-            
-            // 恢复按钮状态
-            setTimeout(() => {
-                button.innerHTML = originalHTML;
-                
-                // 如果朗读失败，显示提示
-                if (!success) {
-                    showSpeechHelp();
-                }
-            }, 500);
-        }
-        
-        // 尝试所有朗读方法
-        function tryAllSpeechMethods(word) {
-            // 方法1: 使用浏览器语音合成
-            if (readWordAloud(word)) {
-                return true;
-            }
-            
-            // 方法2: 使用系统TTS（通过模拟点击文字选择）
-            if (trySystemTTS(word)) {
-                return true;
-            }
-            
-            // 方法3: 使用百度TTS（在线服务）
-            try {
-                if (tryBaiduTTS(word)) {
-                    return true;
-                }
-            } catch (e) {
-                console.log("百度TTS失败");
-            }
-            
-            return false;
-        }
-        
-        // 尝试系统TTS（通过创建临时元素并选中文字）
-        function trySystemTTS(word) {
-            // 这个方法在某些安卓手机上有效
-            try {
-                // 创建一个临时元素
-                const tempElement = document.createElement('div');
-                tempElement.style.position = 'absolute';
-                tempElement.style.left = '-9999px';
-                tempElement.textContent = word;
-                document.body.appendChild(tempElement);
-                
-                // 选中文本
-                const range = document.createRange();
-                range.selectNodeContents(tempElement);
-                const selection = window.getSelection();
-                selection.removeAllRanges();
-                selection.addRange(range);
-                
-                // 尝试使用系统朗读（某些安卓手机会调用系统TTS）
-                document.execCommand('copy');
-                
-                // 清理
-                selection.removeAllRanges();
-                document.body.removeChild(tempElement);
-                
-                return true;
-            } catch (error) {
-                return false;
-            }
-        }
-        
-        // 尝试百度TTS（免费在线服务）
-        function tryBaiduTTS(word) {
-            // 百度TTS API（公共免费版）
-            const encodedText = encodeURIComponent(word);
-            const audioUrl = `https://fanyi.baidu.com/gettts?lan=zh&text=${encodedText}&spd=3&source=web`;
-            
-            // 创建音频元素
-            const audio = new Audio(audioUrl);
-            
-            // 设置超时
-            const timeoutPromise = new Promise((_, reject) => {
-                setTimeout(() => reject(new Error('超时')), 3000);
-            });
-            
-            // 尝试播放
-            const playPromise = audio.play();
-            
-            return Promise.race([playPromise, timeoutPromise])
-                .then(() => {
-                    // 播放成功
-                    audio.onended = () => {
-                        document.body.removeChild(audio);
-                    };
-                    return true;
-                })
-                .catch(() => {
-                    // 播放失败
-                    document.body.removeChild(audio);
-                    return false;
+                pinyinEl.addEventListener('click', () => {
+                    answerEl.classList.toggle('show');
                 });
-        }
-        
-        // 显示语音帮助
-        function showSpeechHelp() {
-            const helpText = `
-                朗读失败？请尝试：
                 
-                1. 点击右上角"..."，选择"在浏览器中打开"
-                2. 使用Chrome或Safari浏览器
-                3. 允许网页使用语音功能
-                4. 或者，家长可以直接根据拼音朗读
-                
-                点击确定后，您可以继续点击其他词语的喇叭按钮尝试
-            `;
-            
-            alert(helpText);
-        }
-        
-        function togglePause() {
-            if (!isDictationRunning) return;
-            
-            isPaused = !isPaused;
-            const pauseBtn = document.getElementById("pauseBtn");
-            
-            if (isPaused) {
-                pauseBtn.innerHTML = '<i class="fas fa-play-circle"></i><span>继续</span>';
-                if ('speechSynthesis' in window) {
-                    window.speechSynthesis.pause();
-                }
-                clearTimeout(timer);
-            } else {
-                pauseBtn.innerHTML = '<i class="fas fa-pause-circle"></i><span>暂停</span>';
-                if ('speechSynthesis' in window) {
-                    window.speechSynthesis.resume();
-                }
-                
-                const readTimes = parseInt(document.getElementById("readTimes").value);
-                const interval = parseInt(document.getElementById("intervalTime").value) * 1000;
-                
-                setTimeout(() => {
-                    playWord(interval, readTimes);
-                }, 500);
-            }
-        }
-        
-        function finishDictation() {
-            clearTimeout(timer);
-            isDictationRunning = false;
-            
-            document.getElementById("startBtn").disabled = false;
-            document.getElementById("pauseBtn").disabled = true;
-            
-            alert("听写完成！点击答案按钮查看结果");
-        }
-        
-        function showAnswer() {
-            selectedWords.forEach((word, index) => {
-                const characterElement = document.getElementById(`character-${index}`);
-                if (characterElement) {
-                    characterElement.innerText = word.word;
-                    characterElement.classList.add("answered");
-                }
-            });
-            
-            document.getElementById("showAnswerBtn").disabled = true;
-        }
-        
-        function resetDictation() {
-            clearTimeout(timer);
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-            }
-            
-            selectedWords = [];
-            currentWordIndex = 0;
-            currentReadTimes = 0;
-            isPaused = false;
-            isDictationRunning = false;
-            
-            document.getElementById("wordsGrid").innerHTML = `
-                <div style="text-align: center; color: #9fa8da; padding: 30px 15px;">
-                    <i class="fas fa-spell-check" style="font-size: 40px; margin-bottom: 10px; display: block;"></i>
-                    <div style="font-size: 16px; font-weight: 500;">点击"开始"按钮</div>
-                    <div style="font-size: 12px; margin-top: 5px;">系统将随机选取词语并朗读</div>
-                </div>
-            `;
-            
-            document.getElementById("startBtn").disabled = false;
-            document.getElementById("pauseBtn").disabled = true;
-            document.getElementById("pauseBtn").innerHTML = '<i class="fas fa-pause-circle"></i><span>暂停</span>';
-            document.getElementById("showAnswerBtn").disabled = false;
-            
-            updateProgress();
-        }
-        
-        function updateProgress() {
-            const total = selectedWords.length;
-            const current = currentWordIndex;
-            const progress = total > 0 ? Math.round((current / total) * 100) : 0;
-            
-            document.getElementById("progressText").textContent = `${current}/${total}`;
-            document.getElementById("progressFill").style.width = `${progress}%`;
-        }
-        
-        // ========== 页面加载完成时初始化 ==========
-        document.addEventListener("DOMContentLoaded", initPage);
-        
-        // iOS语音初始化
-        if ('speechSynthesis' in window) {
-            document.addEventListener("click", function initVoices() {
-                if (speechSynthesis.getVoices().length === 0) {
-                    const tempUtterance = new SpeechSynthesisUtterance("");
-                    speechSynthesis.speak(tempUtterance);
-                    speechSynthesis.cancel();
-                }
-                document.removeEventListener("click", initVoices);
+                wordsContainer.appendChild(card);
             });
         }
+        
+        // 显示所有答案
+        function showAllAnswers() {
+            document.querySelectorAll('.answer').forEach(answer => {
+                answer.classList.add('show');
+            });
+        }
+        
+        // 隐藏所有答案
+        function hideAllAnswers() {
+            document.querySelectorAll('.answer').forEach(answer => {
+                answer.classList.remove('show');
+            });
+        }
+        
+        // 生成新题目
+        function generateNewWords() {
+            const count = parseInt(wordCountSelect.value);
+            currentWords = getRandomWords(count);
+            generateWordCards(currentWords);
+            practiceCount++;
+            updateStats();
+            
+            // 添加动画效果
+            wordsContainer.style.opacity = '0';
+            setTimeout(() => {
+                wordsContainer.style.transition = 'opacity 0.5s';
+                wordsContainer.style.opacity = '1';
+            }, 10);
+        }
+        
+        // 初始化
+        function init() {
+            updateStats();
+            
+            // 按钮事件监听
+            generateBtn.addEventListener('click', generateNewWords);
+            showAllBtn.addEventListener('click', showAllAnswers);
+            hideAllBtn.addEventListener('click', hideAllAnswers);
+            
+            // 初始生成一次题目
+            generateNewWords();
+        }
+        
+        // 页面加载完成后初始化
+        window.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>
